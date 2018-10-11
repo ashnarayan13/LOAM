@@ -14,11 +14,14 @@ You can use the following commands to download and compile the package.
 
 ```
 cd ~/catkin_ws/src
-git clone https://github.com/RobustFieldAutonomyLab/LeGO-LOAM.git
+git clone https://github.com/ashnarayan13/LOAM.git
 cd ..
-catkin_make -j1
+catkin_make_isolated
 ```
-When you compile the code for the first time, you need to add "-j1" behind "catkin_make" for generating some message types. "-j1" is not needed for future compiling.
+## Build docs
+
+To build documentation. Set the CMake flag BUILD_DOC to true. 
+The documentation will be built in doc_doxygen folder in the build directory. 
 
 ## The system
 
