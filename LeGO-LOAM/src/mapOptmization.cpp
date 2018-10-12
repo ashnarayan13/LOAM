@@ -694,6 +694,7 @@ void mapOptimization::performLoopClosure(){
     gtSAMgraph.resize(0);
 
     aLoopIsClosed = true;
+    ROS_INFO("Loop closure complete");
 }
 
 Pose3 mapOptimization::pclPointTogtsamPose3(PointTypePose thisPoint){
