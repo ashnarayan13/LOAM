@@ -42,6 +42,11 @@ ImageProjection::ImageProjection():
     pubSegmentedCloudInfo = nh.advertise<cloud_msgs::cloud_info> ("/segmented_cloud_info", 1);
     pubOutlierCloud = nh.advertise<sensor_msgs::PointCloud2> ("/outlier_cloud", 1);
 
+    //debug
+#ifdef PUBLISH_RANGE
+    pubRangeImage = nh.advertise<sensor_msgs::Image>("/range_image", 1);
+#endif
+
     nanPoint.x = std::numeric_limits<float>::quiet_NaN();
     nanPoint.y = std::numeric_limits<float>::quiet_NaN();
     nanPoint.z = std::numeric_limits<float>::quiet_NaN();
@@ -168,6 +173,17 @@ void ImageProjection::projectPointCloud(){
         fullCloud->points[index] = thisPoint;
 
         fullInfoCloud->points[index].intensity = range;
+
+        //debug
+#ifdef PUBLISH_RANGE
+        std_msgs::Header header; // empty header
+        header.stamp = ros::Time::now(); // time
+        cv_bridge::CvImage img_bridge;
+        sensor_msgs::Image img_msg; // >> message to be sent
+        img_bridge = cv_bridge::CvImage(header, sensor_msgs::image_encodings::RGB8, rangeMat);
+        img_bridge.toImageMsg(img_msg); // from cv_bridge to sensor_msgs::Image
+        pubRangeImage.publish(img_msg);
+#endif
     }
 }
 

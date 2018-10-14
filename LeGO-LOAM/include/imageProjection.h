@@ -4,6 +4,7 @@
  * */
 
 #include "utility.h"
+#include <cv_bridge/cv_bridge.h>
 
 class ImageProjection{
 private:
@@ -19,6 +20,9 @@ private:
     ros::Publisher pubSegmentedCloudPure;
     ros::Publisher pubSegmentedCloudInfo;
     ros::Publisher pubOutlierCloud;
+
+    //debug
+    ros::Publisher pubRangeImage;
 
     pcl::PointCloud<PointType>::Ptr laserCloudIn;
 
